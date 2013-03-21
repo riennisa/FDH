@@ -10,7 +10,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 		
@@ -159,7 +159,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 						echo "
 						<div class='search_result'>
 							<div class='left dynamic_content_left'>Task Name</div>
-							<div class='left dynamic_content_right'> <a href='taskdetail_file.html'> ".$row['namatask']." </a> </div>
+							<div class='left dynamic_content_right'> <a href='detail.php?id=".$row['id']."'> ".$row['namatask']." </a> </div>
 							<br>
 							<div class='left dynamic_content_left'>Deadline</div>
 							<div class='left dynamic_content_right'> ".$row['deadline']." </div>
@@ -246,7 +246,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				Eurilys 2013
+				do.Metro 2013
 			</div>
 		</footer>
 	</body>
