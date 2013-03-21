@@ -21,7 +21,7 @@
 	$login = mysqli_fetch_array($result);
 	
 	echo "<div id='upperprof'>
-		<img src='../img/avatar1.png' alt=''>
+		<img id='profpic' src='../img/".$login['avatar']."' alt=''>
 		<div id='namauser'>
 			" . $login['fullname'] . "
 		</div>
@@ -56,12 +56,17 @@
 			</span>
 		</span>
 	</div>
-	<div id="change_avatar">
-		<span id="left">
-			Avatar;
+	<div id='change_avatar'>
+		<form action='change_avatar.php' enctype='multipart/form-data' method='POST'>
+		<span id='left'>
+			<span id='change_ava'>
+				<button class='link_tosca' id='change_avatar_button' onclick='change_avatar()'> Change Avatar </button>
+			</span>
 		</span>
-		<span id="right">
-			<input type='file' id='avatar' name='avatar' accept=image/*>
+		<span id='right'>
+			<span id='new_avatar'>
+			</span>
 		</span>
+		</form>
 	</div>";
 ?>

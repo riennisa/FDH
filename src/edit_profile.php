@@ -9,7 +9,7 @@
 
 	
 	echo "<div id='upperprof'>
-		<img src='../img/avatar1.png' alt=''>
+		<img id='profpic' src='../img/".$profile['avatar']."' alt=''>
 		<div id='namauser'>
 			<input type='text' class='bio_edit' id='bio_fullname' value='" . $profile['fullname'] . "'>
 		</div>
