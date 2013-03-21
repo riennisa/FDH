@@ -15,7 +15,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 		
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-		<title> Eurilys </title>
+		<title> do.Metro </title>
 	</head>
 	
 	<body>
