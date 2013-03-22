@@ -57,8 +57,8 @@ if ($_FILES["at_upload"]["error"] > 0) {
     if (file_exists("attachment/" . $_FILES["at_upload"]["name"])) {
         echo $_FILES["at_upload"]["name"] . " already exists. ";
     } else {
-        move_uploaded_file($_FILES["at_upload"]["tmp_name"], "attachment/" . $_FILES["at_upload"]["name"]);
-        echo "Stored in: " . "attachment/" . $_FILES["at_upload"]["name"];
+        move_uploaded_file($_FILES["at_upload"]["tmp_name"], "../attachment/" . $_FILES["at_upload"]["name"]);
+        echo "Stored in: " . "../attachment/" . $_FILES["at_upload"]["name"];
     }
 }
 

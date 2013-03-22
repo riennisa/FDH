@@ -48,7 +48,7 @@
 						echo "<a href='profile.php?user=".$curr_username."'>";
 					?>
 					<div class="header_menu_button">
-						<?php echo "<img id='header_img' src='../img/".$login['avatar']."'>";?>
+						<?php echo "<img id='header_img' src='../img/avatar/".$login['avatar']."'>";?>
 						<div id="header_profile">
 							&nbsp;&nbsp;<?php echo $login['username'];?>
 						</div>
@@ -65,7 +65,7 @@
 		<section>
 			<div id="navbar">
 				<div id="short_profile">
-					<img id="profile_picture" src="../img/avatar1.png" alt="">
+					<?php echo "<img id='profile_picture' src='../img/avatar/".$login['avatar']."'>";?>
 					<div id="profile_info">
 						<?php echo $login['username'] ?>
 					</div>
@@ -122,7 +122,7 @@
 					<div class="left dynamic_content_right"><?php echo $row['deadline']; ?></div>
 					<br><br>
 					<div class="left dynamic_content_left">Status</div>
-					<?php echo ";<div id=\"status".$a."\" class=\"left dynamic_content_right\">"; ?>
+					<?php echo "<div id=\"status".$a."\" class=\"left dynamic_content_right\">"; ?>
 					<?php if ($row['status'] == 1)
 					{
 						echo "Selesai";

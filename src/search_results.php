@@ -91,7 +91,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 			<div id="navbar">
 				<?php echo "<a href='profile.php?user=".$curr_username."'>";?>
 				<div id="short_profile">
-					<?php echo "<img id='profile_picture' src='../img/".$profile['avatar']."'>";?>
+					<?php echo "<img id='profile_picture' src='../img/avatar/".$profile['avatar']."'>";?>
 					<div id="profile_info">
 						<?php echo $profile['username'];?>
 					</div>
@@ -140,7 +140,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 					if ($numrows_category > 5) {
 						echo "
 						<a href='search_classified.php?filter=category&q=".$query."'>
-							<button type='submit' id='orange_button'>View more</button>
+							<button type='submit' id='aqua_button'>View more</button>
 						</a>
 						<br>
 						<br>";
@@ -159,7 +159,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 						echo "
 						<div class='search_result'>
 							<div class='left dynamic_content_left'>Task Name</div>
-							<div class='left dynamic_content_right'> <a href='taskdetail_file.html'> ".$row['namatask']." </a> </div>
+							<div class='left dynamic_content_right'> <a href='detail.php?id=".$row['id']."'> ".$row['namatask']." </a> </div>
 							<br>
 							<div class='left dynamic_content_left'>Deadline</div>
 							<div class='left dynamic_content_right'> ".$row['deadline']." </div>
@@ -195,7 +195,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 					if ($numrows_task > 5) {
 						echo "
 						<a href='search_classified.php?f=task&q=".$query."'>
-							<button type='submit' id='orange_button'>View more</button>
+							<button type='submit' id='aqua_button'>View more</button>
 						</a>
 						<br>
 						<br>";
@@ -219,7 +219,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 							<div class='left dynamic_content_right'> ".$row['fullname']." </div>
 							<br>
 							<div class='left dynamic_content_left'>Avatar</div>
-							<div class='left dynamic_content_right'> <img id='user_avatar' src='../img/".$row['avatar']."'></img> </div>
+							<div class='left dynamic_content_right'> <img id='user_avatar' src='../img/avatar/".$row['avatar']."'></img> </div>
 							<br>
 							<br>
 						</div>	
@@ -229,7 +229,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 					if ($numrows_user > 5) {
 						echo "
 						<a href='search_classified.php?f=user&q=".$query."'>
-							<button type='submit' id='orange_button'>View more</button>
+							<button type='submit' id='aqua_button'>View more</button>
 						</a>
 						<br>
 						<br>";
@@ -246,7 +246,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				Eurilys 2013
+				do.Metro 2013
 			</div>
 		</footer>
 	</body>

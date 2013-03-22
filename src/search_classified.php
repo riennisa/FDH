@@ -107,7 +107,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 						echo "<a href='profile.php?user=".$curr_username."'>";
 					?>
 					<div class="header_menu_button">
-						<?php echo "<img id='header_img' src='../img/".$profile['avatar']."'>";?>
+						<?php echo "<img id='header_img' src='../img/avatar/".$profile['avatar']."'>";?>
 						<div id="header_profile">
 							&nbsp;&nbsp;<?php echo $profile['username'];?>
 						</div>
@@ -125,7 +125,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 			<div id="navbar">
 				<?php echo "<a href='profile.php?user=".$curr_username."'>";?>
 				<div id="short_profile">
-					<?php echo "<img id='profile_picture' src='../img/".$profile['avatar']."'>";?>
+					<?php echo "<img id='profile_picture' src='../img/avatar/".$profile['avatar']."'>";?>
 					<div id="profile_info">
 						<?php echo $profile['username'];?>
 					</div>
@@ -233,7 +233,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 							<div class='left dynamic_content_right'> ".$row['fullname']." </div>
 							<br>
 							<div class='left dynamic_content_left'>Avatar</div>
-							<div class='left dynamic_content_right'> <img id='user_avatar' src='../img/".$row['avatar']."'></img> </div>
+							<div class='left dynamic_content_right'> <img id='user_avatar' src='../img/avatar/".$row['avatar']."'></img> </div>
 							<br>
 							<br>
 						</div>	
@@ -293,7 +293,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				Eurilys 2013
+				do.Metro 2013
 			</div>
 		</footer>
 	</body>

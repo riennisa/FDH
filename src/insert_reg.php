@@ -23,8 +23,8 @@ if ($_FILES["avatar_upload"]["error"] > 0) {
     if (file_exists("upload/" . $_FILES["avatar_upload"]["name"])) {
         echo $_FILES["avatar_upload"]["name"] . " already exists. ";
     } else {
-        move_uploaded_file($_FILES["avatar_upload"]["tmp_name"], "upload/" . $_FILES["avatar_upload"]["name"]);
-        echo "Stored in: " . "upload/" . $_FILES["avatar_upload"]["name"];
+        move_uploaded_file($_FILES["avatar_upload"]["tmp_name"], "../img/avatar/" . $_FILES["avatar_upload"]["name"]);
+        echo "Stored in: " . "../img/avatar/" . $_FILES["avatar_upload"]["name"];
     }
 }
 

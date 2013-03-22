@@ -9,7 +9,7 @@
 
 	
 	echo "<div id='upperprof'>
-		<img src='../img/avatar1.png' alt=''>
+		<img id='profpic' src='../img/avatar/".$profile['avatar']."' alt=''>
 		<div id='namauser'>
 			<input type='text' class='bio_edit' id='bio_fullname' value='" . $profile['fullname'] . "'>
 		</div>
@@ -21,8 +21,6 @@
 		<b>Email</b>
 		<br/>
 		<b>Birthdate</b>
-		<br/>
-		<b>Change Avatar</b>
 		<br/>
 		<button class='link_tosca' id='save_profile_button' onclick=\"save_profile(".$id['id'].",'".$profile['password']."')\"> Save Changes </button>
 		</span>

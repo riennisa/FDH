@@ -58,7 +58,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 						echo "<a href='profile.php?user=".$curr_username."'>";
 					?>
 					<div class="header_menu_button current_header_menu">
-						<?php echo "<img id='header_img' src='../img/".$login['avatar']."'>";?>
+						<?php echo "<img id='header_img' src='../img/avatar/".$login['avatar']."'>";?>
 						<div id="header_profile">
 							&nbsp;&nbsp;<?php echo $login['username'];?>
 						</div>
@@ -75,7 +75,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 		<section>
 			<div id="profile_left">
 				<div id="upperprof">
-					<?php echo "<img id='profpic' src='../img/".$profile['avatar']."'>";?>
+					<?php echo "<img id='profpic' src='../img/avatar/".$profile['avatar']."'>";?>
 					<div id="namauser">
 					<?php
 						echo $profile['fullname'];
@@ -171,7 +171,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				Eurilys 2013
+				do.Metro 2013
 			</div>
 		</footer>
 	</body>

@@ -27,6 +27,11 @@
 		include 'koneksi.php';
 		$id = $_GET['id'];
 		$uid = $_COOKIE['username'];
+		$sql_id = mysql_query("SELECT id FROM user WHERE username LIKE '".$uid."'");
+		$loginid = mysql_fetch_array($sql_id);
+		
+		$result = mysql_query("SELECT * FROM user WHERE id=".$loginid['id']);
+		$profile= mysql_fetch_array($result);
 	?>
 	
 	<body>
@@ -50,10 +55,10 @@
 				<div class="header_menu"> 
 					<a href="dashboard.php"><div class="header_menu_button"> DASHBOARD </div></a>
 					<?php
-						echo "<a href='profile.php?user=".$curr_username."'>";
+						echo "<a href='profile.php?user=".$uid."'>";
 					?>
-					<div class="header_menu_button current_header_menu">
-						<?php echo "<img id='header_img' src='../img/".$login['avatar']."'>";?>
+					<div class="header_menu_button">
+						<?php echo "<img id='header_img' src='../img/avatar/".$login['avatar']."'>";?>
 						<div id="header_profile">
 							&nbsp;&nbsp;<?php echo $login['username'];?>
 						</div>
@@ -69,15 +74,14 @@
 		<!-- Web Content -->
 		<section>
 			<div id="navbar">
+				<?php echo "<a href='profile.php?user=".$curr_username."'>";?>
 				<div id="short_profile">
-					<img id="profile_picture" src="../img/avatar1.png" alt="">
+					<?php echo "<img id='profile_picture' src='../img/avatar/".$profile['avatar']."'>";?>
 					<div id="profile_info">
-						Ruth Nattassha 
-						<br><br>
-						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
+						<?php echo $profile['username'];?>
 					</div>
 				</div>
-				
+				<?php echo "</a>" ?>
 			</div>
 			<form>
 			<div id="dynamic_content">
@@ -138,7 +142,7 @@
 $hasilassignee=mysql_query($assignee);
 while($rowassignee=mysql_fetch_array($hasilassignee)){
 
-echo "<a href=\"profil.php?id=".$rowassignee['id']." \">".$rowassignee['nama_user']."</a>";
+echo "<a href=\"profile.php?user=".$rowassignee['nama_user']." \">".$rowassignee['nama_user']."</a>";
 echo "<br>";
 }
 ?>
@@ -238,7 +242,7 @@ $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 // while there are rows to be fetched...
 while ($list = mysql_fetch_assoc($result)) {
    // echo data
-   echo "<img width=\"30\" height=\"30\" src=\"upload/".$list['avatar']."\"></img> (".$list['waktu'].") : ";
+   echo "<img width=\"30\" height=\"30\" src=\"../img/avatar/".$list['avatar']."\"></img> (".$list['waktu'].") : ";
   echo $list['komentar'];
   echo "<br><hr>";
 } // end while
