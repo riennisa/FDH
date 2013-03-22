@@ -10,7 +10,7 @@
         <script type="text/javascript" src="js/ajax.js"></script> 
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-        <title> Eurilys </title>
+        <title> do.Metro </title>
     </head>
 
     <body>
@@ -36,12 +36,13 @@
                         <img id="tutorial_image" src="img/tutorial.png" alt="tutorial_pic"/>
                     </div>
                     <div id="tutorial">
-                        <span class="red"> Eurilys </span> is an online to-do-list website which is easy to use, user-friendly, and the most important 
-                        thing of all, it's <span class="blue">FREE</span>!
+                        <span class="judul"><strong>Your Trusted Partner</strong></span>
                         <br>
-                        You can add task, category for each task, and you can write down all the task's details here. 
+                        <br> 
+                        More than 3.5 million people use <span class="blue">do.Metro</span> to get things done.
                         <br>
-                        No more papers, pen, and confusion. <span class="red"> Eurilys </span> is here to be your organization's partner.
+                        Whether you're organizing your business, sharing a shopping list with a loved one or simply keeping track of your daily life, <span class="blue">do.Metro</span> is the best to-do list for you, your team or your family.  
+                        <br>
                     </div>
                 </div>
             </div>
@@ -50,13 +51,13 @@
                     <form id="login_form" method="post" action="javascript:logincheckajax()">
                         <label> Username </label> <input type="text" id="login_username" name="userusername"/>
                         <br/><label> Password </label> <input type="password" id="login_password" name="userpassword"/> 
-                        <div id="login_button_submit" class="right link_red top10" onclick="javascript:this.parentNode.submit()"> Login </div>
-                        <input type="checkbox" id="remember_me_check" name="rememberme" value="1"/> <label id="remember_me"> Remember me </label>
+                        <div id="login_button_submit" class="right link_red top10" onclick="javascript:this.parentNode.submit()"> LOGIN </div>
+                        <input type="checkbox" id="remember_me_check" name="rememberme" value="1"/> <label id="remember_me"> Remember me &nbsp; &nbsp; &nbsp;</label>
                     </form>
                 </div>
 
                 <div class="signup_label">
-                    Have No Account ? 
+                    <strong>Have No Account ?</strong> 
                 </div>
                 <div id="signup_form_container"> 
                     <form id="signup_form" method="post" action="src/insert_reg.php" enctype="multipart/form-data" >
@@ -88,9 +89,8 @@
                         <input type="file" onchange="javascript:regCheck();" name="avatar_upload" id="avatar_upload"/> 
                         <img src="img/yes.png" id="avatar_validation" class="signup_form_validation" alt="validation image">
 
-                   <!--     <div id="signup_button_submit" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
-                   -->
-                        <input type="submit" id="signupbutton" value="Sign Up">
+                       <div id="signup_button_submit" class="right link_red top10" title="Semua elemen form harus diisi dengan benar dahulu." onclick="javascript:this.parentNode.submit()"> SIGN UP </div>
+                   
                     </form>
                 </div>
             </div>
