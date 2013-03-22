@@ -1,3 +1,11 @@
+<?php
+
+if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
+    header('Location:src/dashboard.php') ; 
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <!--
