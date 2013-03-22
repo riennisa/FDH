@@ -10,7 +10,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 	<head>
 		<link rel="stylesheet" href="../css/desktop_style.css">
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="../js/base_search.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"></script> 
 		<script type="text/javascript" src="../js/profile.js"></script>
@@ -171,7 +171,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				do.Metro 2013
+				Eurilys 2013
 			</div>
 		</footer>
 	</body>

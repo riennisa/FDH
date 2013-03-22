@@ -11,7 +11,7 @@ $taskname = $_POST['task_name_input'];
 $deadline = $_POST['deadline_input'];
 $as = $_POST['assignee'];
 $tag = $_POST['tag_input'];
-$cat = $_POST['select_task_kat'];
+$cat = $_POST['idkat'];
 $ava = $_FILES["at_upload"]["name"] ;
 
 echo $newid ;
@@ -19,6 +19,7 @@ echo $taskname ;
 echo $deadline ;
 echo $as ;
 echo $tag ;
+echo $cat ;
 echo $ava ;
 
 //Insert data to database

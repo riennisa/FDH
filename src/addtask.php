@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <?php
 include 'koneksi.php';
-
+$idkat = $_GET['idkat'];
 $querykat = "SELECT * FROM kategori";
 $result = mysql_query($querykat);
 $option = "" ;
-while ($row = mysql_fetch_array($result)) {
-    $option = $option . "<option value='" . $row['idkat'] . "'>". $row['namakat'] ."</option>";
-}
+
+$curr_username = $_COOKIE['username'];
+		$sql_id = mysql_query("SELECT id FROM user WHERE username LIKE '".$curr_username."'");
+		$loginid = mysql_fetch_array($sql_id);
+		
+		$result = mysql_query("SELECT * FROM user WHERE id=".$loginid['id']);
+		$login = mysql_fetch_array($result);
 ?>
 
 
@@ -15,6 +19,8 @@ while ($row = mysql_fetch_array($result)) {
     <head>
         <link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/search.js"></script> 
         <script type="text/javascript" src="../js/edit_task.js"></script> 
         <script type="text/javascript" src="../js/animation.js"></script> 
         <script type="text/javascript" src="../js/ajax.js"></script> 
@@ -51,21 +57,39 @@ while ($row = mysql_fetch_array($result)) {
 
     <body>
         <!-- Web Header -->
-        <header>
-            <div id="header_container"> 
-                <div class="left">
-                    <a href="dashboard.html"> <img src="../img/logo.png" alt="logo"> </a>
-                </div>
-                <input id="search_box" type="text" placeholder="search...">
-                <div class="header_menu"> 
-                    <div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>  </div>
-                    <div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
-                    <div class="header_menu_button"> <a id="logout" href="../index.php"> LOGOUT </a> </div>
-                </div>
-
-            </div>
-            <div class="thin_line"></div>
-        </header>
+		<header>
+			<div id="header_container"> 
+				<div class="left">
+					<a href="dashboard.php"> <img src="../img/logo.png" alt=""> </a>
+				</div>
+				<form id="search_form" action="search_results.php" method="get" class="sb_wrapper">
+					<input id="search_box" name="search_query" type="text" placeholder="Search...">
+					<button type="submit" id="search_button" value></button>
+					<ul class="sb_dropdown">
+						<li class="sb_filter">Filter your search</li>
+						<li><input type="checkbox"/><label for="all"><strong>Select All</strong></label></li>
+						<li><input type="checkbox" name="username" id="username" /><label for="Username">Username</label></li>
+						<li><input type="checkbox" name="category" id="category" /><label for="Category">Category</label></li>
+						<li><input type="checkbox" name="task" id="task" /><label for="Task">Task</label></li>
+					</ul>
+				</form>
+				<div class="header_menu"> 
+					<a href="dashboard.php"><div class="header_menu_button"> DASHBOARD </div></a>
+					<?php
+						echo "<a href='profile.php?user=".$curr_username."'>";
+					?>
+					<div class="header_menu_button current_header_menu">
+						<?php echo "<img id='header_img' src='../img/".$login['avatar']."'>";?>
+						<div id="header_profile">
+							&nbsp;&nbsp;<?php echo $login['username'];?>
+						</div>
+					</div>
+					</a>
+					<a id="logout" href="logout.php"><div class="header_menu_button"> LOGOUT </div></a>
+				</div>
+			</div>
+			<div class="thin_line"></div>
+		</header>
 
         <!-- Web Content -->
         <section>
@@ -78,28 +102,7 @@ while ($row = mysql_fetch_array($result)) {
                         <div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
                     </div>
                 </div>
-                <div id="category_list">
-                    <div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
-                    <ul id="category_item">
-                        <li><a href="Dashboard.html" onclick="catchange(1)" id="kuliah">Kuliah</a></li>
-                        <li><a href="Dashboard.html" onclick="catchange(2)" id="proyek">Proyek</a></li>
-                        <li><a href="Dashboard.html" onclick="catchange(3)" id="tugas">Tugas</a></li>
-                        <li><a href="Dashboard.html" onclick="catchange(4)" id="lomba">Lomba</a></li>
-                    </ul>
-                    <div id="add_task_link"> <a href="addtask.html"> + new task </a> </div>
-                    <div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
-                    <div id="category_form">
-                        <div id="category_form_inner">
-                            Category name : <br>
-                            <input type="text" id="add_category_name" value="">
-                            <br><br>
-                            Assignee(s) : <br>
-                            <input type="text" id="add_category_asignee_name" value="">
-                            <br><br>
-                            <div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div id="dynamic_content">
                 <div id="add_task_container">
@@ -155,13 +158,12 @@ while ($row = mysql_fetch_array($result)) {
                         </div>
 
                         <div id="row6_addtask" class="left top10 dynamic_content_row">
-                            <div id="attachment_lat" class="left dynamic_content_left">Category</div>
+                            <div id="attachment_lat" class="left dynamic_content_left"></div>
                             <div id="attachment_rat" class="left dynamic_content_right">
-                                <select name="select_task_kat">
+                                
                                     <?php
-                                        echo $option;
+                                        echo "<input type=\"hidden\" name=\"idkat\" id=\"idkat\" value=\"".$idkat."\">";
                                     ?>
-                                </select>
                             </div>
                         </div>
 

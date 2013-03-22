@@ -1,6 +1,6 @@
 <?php
 
-if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
+if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     header('Location:src/dashboard.php') ; 
 }
 
@@ -13,7 +13,7 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
     -->
 
     <head>
-        <link href='css/desktop_style.css' rel='stylesheet' type='text/css'>
+        <link href='css/desktop_style_hanif.css' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="js/animation.js"></script> 
         <script type="text/javascript" src="js/ajax.js"></script> 
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -22,10 +22,6 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
     </head>
 
     <body>
-        <script>
-            var userlocal = localStorage.getItem('username');
-            var passlocal = localStorage.getItem('password');
-        </script>
         <!-- Web Header -->
         <header>
             <div id="header_container"> 
@@ -60,7 +56,7 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
                         <label> Username </label> <input type="text" id="login_username" name="userusername"/>
                         <br/><label> Password </label> <input type="password" id="login_password" name="userpassword"/> 
                         <div id="login_button_submit" class="right link_red top10" onclick="javascript:this.parentNode.submit()"> LOGIN </div>
-                        <input type="checkbox" id="remember_me_check" name="rememberme" value="1"/> <label id="remember_me"> Remember me &nbsp; &nbsp; &nbsp;</label>
+                        <input type="checkbox" id="remember_me_check" name="rememberme" value="1"/> <label id="remember_me"> Remember me</label>
                     </form>
                 </div>
 
@@ -109,7 +105,7 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
         <footer>
             <div id="footer_container"> 
                 <br><br>
-                About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
+                About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privacy &nbsp;&nbsp;&nbsp; Copyright 
                 <br>
                 Eurilys 2013
             </div>
