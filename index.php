@@ -27,14 +27,14 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
             var passlocal = localStorage.getItem('password');
         </script>
         <!-- Web Header -->
-       <header id="header">
-			<div id="header_container"> 
-				<div class="header_logo">
-					<a href="index.php"> <img src="img/logo.png" alt=""> </a>
-				</div>
-			<div class="thin_line"></div>
-		</header>	
-	
+        <header>
+            <div id="header_container"> 
+                <div class="left">
+                    <img src="img/logo.png" alt="logo"/>
+                </div>
+            </div>
+            <div class="thin_line"></div>
+        </header>
 
         <!-- Web Content -->
         <section>
@@ -109,9 +109,9 @@ if (($_COOKIE['username'] != '') && ($_COOKIE['password'] != '')) {
         <footer>
             <div id="footer_container"> 
                 <br><br>
-                About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privacy &nbsp;&nbsp;&nbsp; Copyright 
+                About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
                 <br>
-                <span><strong>do.</strong></span>Metro 2013
+                Eurilys 2013
             </div>
         </footer>
     </body>

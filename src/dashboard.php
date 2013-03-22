@@ -22,26 +22,49 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 	</head>
 	
 	<body>
+		<?php include 'connect.php' ?>
+		<?php
+			$username = $_COOKIE['username'];
+			$sql_id = mysqli_query($conn, "SELECT id FROM user WHERE username LIKE '".$username."'");
+			$id = mysqli_fetch_array($sql_id);
+			
+			$result = mysqli_query($conn, "SELECT * FROM user WHERE id=".$id['id']);
+			$profile = mysqli_fetch_array($result);
+		?>
 		<!-- Web Header -->
-		<header id="header">
+		<header>
 			<div id="header_container"> 
 				<div class="left">
-					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
+					<a href="dashboard.php"> <img src="../img/logo.png" alt=""> </a>
 				</div>
-				<input id="search_box" type="text" placeholder="search...">
+				<form id="search_form" action="search_results.php" method="get" class="sb_wrapper">
+					<input id="search_box" name="search_query" type="text" placeholder="Search...">
+					<button type="submit" id="search_button" value></button>
+					<ul class="sb_dropdown">
+						<li class="sb_filter">Filter your search</li>
+						<li><input type="checkbox"/><label for="all"><strong>Select All</strong></label></li>
+						<li><input type="checkbox" name="username" id="username" /><label for="Username">Username</label></li>
+						<li><input type="checkbox" name="category" id="category" /><label for="Category">Category</label></li>
+						<li><input type="checkbox" name="task" id="task" /><label for="Task">Task</label></li>
+					</ul>
+				</form>
 				<div class="header_menu"> 
-					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>   </div>
-					<div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
-					<div class="header_menu_button"> <a id="logout" href="logout.php"> LOGOUT </a> </div>
-                    <a href="#" onclick="javascript:changecolor(1);"><img src="../img/hijau.jpg" ></a>
-                    <a href="#" onclick="javascript:changecolor(2);"><img src="../img/ungu.jpg"></a>
-                    <a href="#" onclick="javascript:changecolor(3);"><img src="../img/biru.jpg"></a>
+					<a href="dashboard.html"><div class="header_menu_button current_header_menu"> DASHBOARD </div></a>
+					<?php
+						echo "<a href='profile.php?user=".$username."'>";
+					?>
+					<div class="header_menu_button">
+						<img id="header_img" src="../img/avatar1.png">
+						<div id="header_profile">
+							&nbsp;&nbsp;<?php echo $profile['username'];?>
+						</div>
+					</div>
+					</a>
+					<a id="logout" href="../index.php"><div class="header_menu_button"> LOGOUT </div></a>
 				</div>
-				
 			</div>
 			<div class="thin_line"></div>
-		</header>	
-	
+		</header>
 		
 		<!-- Web Content -->
 		<section>
@@ -49,9 +72,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				<div id="short_profile">
 					<img id="profile_picture" src="../img/avatar1.png" alt="">
 					<div id="profile_info">
-						Ruth Natasha 
-						<br><br>
-						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
+						<?php echo $profile['username'];?>
 					</div>
 				</div>
 				<div id="category_list">
@@ -62,7 +83,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 						<li><a href="#" onclick="catchange(3)" id="tugas">Tugas</a></li>
 						<li><a href="#" onclick="catchange(4)" id="lomba">Lomba</a></li>
 					</ul>
-					<div id="add_task_link"> <a href="addtask.php"> + new task </a> </div>
+					<div id="add_task_link"> <a href="addtask.html"> + new task </a> </div>
 					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 					<div id="category_form">
 						<div id="category_form_inner">
