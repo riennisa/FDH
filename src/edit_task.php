@@ -10,7 +10,7 @@ $assignee="select * from assignee where idtask= '$id'";
 $hasilass=mysql_query($assignee);
 while($rowass=mysql_fetch_array($hasilass)){
 
-echo "<a href=\"profil.php?id=".$rowass['id']." \">".$rowass['nama_user']."</a>";
+echo "<a href=\"profile.php?user=".$rowass['nama_user']." \">".$rowass['nama_user']."</a>";
 echo "<br>";
 }
 
@@ -19,7 +19,9 @@ echo "<div id=\"result\" style=\"display:none;\"></div>
 <form>
    <table>
         <tr>
-			<input type=\"text\" id=\"assignee\" value=\"\" ></input>
+			<input type=\"text\" id=\"assignee\" autocomplete=\"off\" list=\"listassignee\" onkeydown=\"javascript:getSuggest();\"></input>
+<datalist id=\"listassignee\">
+                                            </datalist>
         </td>
         </tr>
         

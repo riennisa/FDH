@@ -1,3 +1,16 @@
+<?php
+
+if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
+    header('Location:../index.php') ; 
+}
+
+include "koneksi.php";
+
+$curr_username = $_COOKIE['username'];
+$sql_id = mysql_query("SELECT id FROM user WHERE username LIKE '".$curr_username."'");
+$loginid = mysql_fetch_array($sql_id);
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,22 +62,11 @@
 </tr>
 <td>Assignee</td>
 <td>:</td>
-<td><TABLE id="dataTable" width="290px" border="0.5">
-                                    <TR>
-                                        <TD><INPUT type="checkbox" name="chk"/></TD>
-                                        <TD>
-                                            <input type="text" name="assignee[]" autocomplete="off" list="listassignee" onkeydown="javascript:getSuggest();">
-                                            <datalist id="listassignee">
-                                            </datalist>
-                                        </TD>
-                                    </TR>
-                                </TABLE> </td>
+<td><?php echo $curr_username; ?> </td>
 </tr>
 <tr>
 <td colspan="3" align="center">
-                            <input id="more_assignee_button" type="button" value="Add Assignee" class="link_blue_rect" onclick="addRow('dataTable')"/>
-                            <input id="del_assignee_button" type="button" value="Remove Assignee" class="link_blue_rect" onclick="deleteRow('dataTable')"/>
-<input type="submit" name="input" value="Tambah"></td>
+                            <input type="submit" name="input" value="Tambah"></td>
 </tr>
 </table>
 </form>

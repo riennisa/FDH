@@ -20,5 +20,5 @@ else if ($row['status'] == 0)
 }
 
 
-mysql_close($con);
+mysql_close($conn);
 ?> 

@@ -7,13 +7,13 @@ $cat="select * from tugas where idkat= '$id'";
 $hasilcat=mysql_query($cat);
 $i = 1;
 
-echo "<div style=\"display:block;\" id=\"add_links\"><center><a href=\"addtask.php?idkat=".$id."\">Add Task</a></center></div>";
+echo "<div style=\"display:block;\" id=\"add_links\"><center><a href=\"addtask.php?idkat=".$id."\"><span class='link_blue'>Add Task</span></a></center></div>";
 while($row=mysql_fetch_array($hasilcat)){
 $idtask=$row['id'];
 echo "<br>";
 echo "<div class=\"task_view\" id=\"curtask".$i."\">";
 $i++;
-echo "<img src=\"../img/done.png\" id=\"finish_".$idtask."\" onclick=\"window.open('delete.php?id=".$idtask."','_self')\" class=\"task_done_button\" alt=\" \"/>";
+echo "<img src=\"../img/done.png\" id=\"finish_".$idtask."\" onclick=\"deletetask(".$idtask.")\" class=\"task_done_button\" alt=\" \"/>";
 echo "<div id=\"task_name_ltd\" class=\"left dynamic_content_left\">Nama Task</div>";
 echo "<div id=\"task_name_rtd\" class=\"left dynamic_content_right\">";
 echo "<a href=\"detail.php?id=".$idtask."\"> ";

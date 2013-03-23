@@ -1,4 +1,4 @@
 <?php
-$conn=mysql_connect("localhost", "root", "");
-mysql_select_db("mytask");
+$conn=mysql_connect("localhost", "progin", "progin");
+mysql_select_db("progin_405_13510108");
 ?> 

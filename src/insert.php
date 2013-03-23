@@ -1,3 +1,16 @@
+<?php
+
+if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
+    header('Location:../index.php') ; 
+}
+
+include "koneksi.php";
+
+$curr_username = $_COOKIE['username'];
+$sql_id = mysql_query("SELECT id FROM user WHERE username LIKE '".$curr_username."'");
+$loginid = mysql_fetch_array($sql_id);
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,14 +25,13 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >		
 		<title> Eurilys </title>
 	</head>
-	<?php
-include "koneksi.php";
+<?php
 
 $namakat=$_POST['namakat'];
-$assignee=$_POST['assignee'];
+$a = $loginid['id'];
 
-$simpan = mysql_query("insert into kategori (namakat)
-values ('$namakat')");
+$simpan = mysql_query("insert into kategori (namakat,idcreator)
+values ('$namakat','$a')");
 if ($simpan){
 
 echo "<script>alert('Berhasil'); history.go(-1); window.close();  </script>";

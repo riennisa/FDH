@@ -58,7 +58,7 @@ function change_pass() {
 	document.getElementById("form_change_password").innerHTML = ": <input type='password' class='bio_edit' id='bio_changepass'><br/>: <input type='password' class='bio_edit' id='bio_confirmpass'>";
 }
 
-function save_pass() {
+function save_pass(password) {
 	var new_pass = document.getElementById("bio_changepass").value;
 	var confirm_pass = document.getElementById("bio_confirmpass").value;
 	var cont;

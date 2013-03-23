@@ -16,12 +16,13 @@
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/edit_task.js"> </script> 
 		<script type="text/javascript" src="../js/animation.js"> </script> 
+		<script type="text/javascript" src="../js/ajax.js"> </script> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >		
-		<title> Eurilys </title>
+		<title> do.Metro </title>
 	</head>
 	<?php
 		include 'koneksi.php';
@@ -98,8 +99,22 @@
 				
 				
 				
-				<?php echo "<input id=\"edit_task_button\" class=\"left top30 link_blue_rect\" 
-					onclick=\"edit_task(".$row['id'].")\" type=\"button\" value=\"Edit Task\">"; ?>
+				<?php
+					$query = "select username from `assignee`,`user`,`tugas` where assignee.idtask = $idtask and tugas.id = $idtask and assignee.nama_user = user.username" ;
+					$result = mysql_query($query);
+					$bool = false;
+					
+					while ($res = mysql_fetch_array($result)) {
+						if ($res['username']== $uid  ) {
+							$bool = true ;
+							}	
+					}
+					
+					if ($bool == true) {
+						echo "<input id=\"edit_task_button\" class=\"left top30 link_blue_rect\" 
+						onclick=\"edit_task(".$row['id'].")\" type=\"button\" value=\"Edit Task\">";
+						}
+				?>
 				
 				<?php echo "<input id=\"save_button_td\" class=\"left top30 link_blue_rect\" 
 					onclick=\"save_edit_task(".$row['id'].")\" type=\"button\" value=\"Save\">"; ?>
@@ -124,6 +139,7 @@
 					</div>
 					<?php echo "<input id=\"edit_task_button\" class=\"changestat\" onclick=\"changestat(".$idtask.",".$a.")\" type=\"button\" value=\"Ubah\">"; $a++; ?>
 					<br><br>
+					</div>
 				
 				<div id="row3_taskdetail" class="left top10 dynamic_content_row">
 					<div id="deadline_ltd" class="left dynamic_content_left">Deadline</div>
@@ -131,6 +147,35 @@
 					<?php 
 					echo $row['deadline']; 
 					?></div>
+				</div>
+				<div id="row31_taskdetail" class="left top10 dynamic_content_row">
+					<div id="attachment_ltd" class="left dynamic_content_left">Attachment</div>
+					<div id="attachment_rtd" class="left dynamic_content_right">
+					<?php 
+					$query="SELECT * from `attachment` where attachment.idtask = '$id'  " ;
+					$result = mysql_query($query);
+					while ($row = mysql_fetch_array($result)) {
+						$temp = (explode(".", $row["filename"]));
+						$ext = end($temp);
+						
+						if (($ext == "pdf") || ($ext == "doc")) {
+						
+							echo "Download : <a href=\"../attachment/".$row['filename']."\" target=\"_blank\">".$row['filename']."</a><br>"; 
+						
+						} else if (($ext == "jpg") || ($ext == "jpeg")) {	
+						
+							echo "<img width=\"300\" src=\"../attachment/".$row['filename']."\"></img><br>"; 
+						
+						} else if ($ext == "ogg" || $ext == "3gp") {
+						
+							echo "<video width=\"320\" height=\"240\" controls=\"controls\">
+									<source src=\"../attachment/".$row['filename']."\" type=\"video/ogg\">
+									Your browser does not support the video tag.
+								</video><br>";
+						}
+					}	
+					?>
+					</div>
 				</div>
 				<div id="row4_taskdetail" class="left top10 dynamic_content_row">
 					<div id="assignee_ltd" class="left dynamic_content_left">Assignee</div>
@@ -146,7 +191,10 @@ echo "<a href=\"profile.php?user=".$rowassignee['nama_user']." \">".$rowassignee
 echo "<br>";
 }
 ?>
-<div id="edit_ass" style="display:none"> <form> <table>  <tr> <input type="text" id="assignee" value="" ></input></td></tr><tr><td><?php echo "<input id=\"tambah_button\" type=\"button\" onclick=\"addRows(".$id.")\" value=\"Tambah\" />" ?>  </td>    </tr>   </table></form>
+<div id="edit_ass" style="display:none"> <form> <table>  <tr> <input type="text" id="assignee" autocomplete="off" list="listassignee" onkeydown="javascript:getSuggest();"></input>
+<datalist id="listassignee">
+                                            </datalist>
+											</td></tr><tr><td><?php echo "<input id=\"tambah_button\" type=\"button\" onclick=\"addRows(".$id.")\" value=\"Tambah\" />" ?>  </td>    </tr>   </table></form>
 					</div>
 <div id="delete_ass" style="display:none"> <?php
 					echo "<form action=\"\"> <select id=\"assignees\" onchange=\"delAss(this.value, ".$id.")\"> <option value=\"\">Delete an assignee:</option>";
@@ -208,7 +256,7 @@ $r = mysql_fetch_row($result);
 $numrows = $r[0];
 
 // number of rows to show per page
-$rowsperpage = 3;
+$rowsperpage = 10;
 // find out total pages
 $totalpages = ceil($numrows / $rowsperpage);
 
@@ -236,7 +284,7 @@ if ($currentpage < 1) {
 $offset = ($currentpage - 1) * $rowsperpage;
 
 // get the info from the db 
-$sql = "select *, user.id as uid from komentar,user where idtask= '$idtask' and user.id=komentar.iduser order by waktu DESC LIMIT $offset, $rowsperpage";
+$sql = "select *, user.id as uid, komentar.id as kid from komentar,user where idtask= '$idtask' and user.id=komentar.iduser order by kid DESC LIMIT $offset, $rowsperpage";
 $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
 // while there are rows to be fetched...
@@ -244,12 +292,17 @@ while ($list = mysql_fetch_assoc($result)) {
    // echo data
    echo "<img width=\"30\" height=\"30\" src=\"../img/avatar/".$list['avatar']."\"></img> (".$list['waktu'].") : ";
   echo $list['komentar'];
+  if ($list['iduser'] == $loginid['id'])
+					{
+						echo "<input class=\"right top30 link_blue_rect\" type=\"button\" value=\"Delete\" onclick=\"del_komen(".$list['kid'].",".$idtask.");\"></input>"; 
+						
+					}
   echo "<br><hr>";
 } // end while
 
 /******  build the pagination links ******/
 // range of num links to show
-$range = 3;
+$range = 5;
 
 // if not on page 1, don't show back links
 if ($currentpage > 1) {
@@ -326,7 +379,7 @@ echo "<div id=\"result\" style=\"display:none;\"></div>
 				<br><br>
 				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
 				<br>
-				Eurilys 2013
+				do.Metro 2013
 			</div>
 		</footer>
 	</body>

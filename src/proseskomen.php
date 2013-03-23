@@ -20,7 +20,7 @@ $r = mysql_fetch_row($result);
 $numrows = $r[0];
 
 // number of rows to show per page
-$rowsperpage = 3;
+$rowsperpage = 10;
 // find out total pages
 $totalpages = ceil($numrows / $rowsperpage);
 
@@ -48,14 +48,19 @@ if ($currentpage < 1) {
 $offset = ($currentpage - 1) * $rowsperpage;
 
 // get the info from the db 
-$sql = "select *, user.id as uid from komentar,user where idtask= '$id' and user.id=komentar.iduser order by waktu DESC LIMIT $offset, $rowsperpage";
+$sql = "select *, user.id as uid, komentar.id as kid from komentar,user where idtask= '$id' and user.id=komentar.iduser order by kid DESC LIMIT $offset, $rowsperpage";
 $result = mysql_query($sql, $conn) or trigger_error("SQL", E_USER_ERROR);
 
 // while there are rows to be fetched...
 while ($list = mysql_fetch_assoc($result)) {
    // echo data
-   echo "<img width=\"30\" height=\"30\" src=\"upload/".$list['avatar']."\"></img> (".$list['waktu'].") : ";
+   echo "<img width=\"30\" height=\"30\" src=\"../img/avatar/".$list['avatar']."\"></img> (".$list['waktu'].") : ";
   echo $list['komentar'];
+  if ($list['iduser'] == $uid)
+					{
+						echo "<input class=\"right top30 link_blue_rect\" type=\"button\" value=\"Delete\" onclick=\"del_komen(".$list['kid'].",".$id.");\"></input>"; 
+						
+					}
   echo "<br><hr>";
 } // end while
 
@@ -66,11 +71,11 @@ $range = 3;
 // if not on page 1, don't show back links
 if ($currentpage > 1) {
    // show << link to go back to page 1
-   echo " <a href='{$_SERVER['PHP_SELF']}?id=".$id."&currentpage=1'><<</a> ";
+   echo " <a href='detail.php?id=".$id."&currentpage=1'><<</a> ";
    // get previous page num
    $prevpage = $currentpage - 1;
    // show < link to go back to 1 page
-   echo " <a href='{$_SERVER['PHP_SELF']}?id=".$id."&currentpage=$prevpage'><</a> ";
+   echo " <a href='detail.php?id=".$id."&currentpage=$prevpage'><</a> ";
 } // end if 
 
 // loop to show links to range of pages around current page
@@ -84,7 +89,7 @@ for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
       // if not current page...
       } else {
          // make it a link
-         echo " <a href='{$_SERVER['PHP_SELF']}?id=".$id."&currentpage=$x'>$x</a> ";
+         echo " <a href='detail.php?id=".$id."&currentpage=$x'>$x</a> ";
       } // end else
    } // end if 
 } // end for
@@ -94,9 +99,9 @@ if ($currentpage != $totalpages) {
    // get next page
    $nextpage = $currentpage + 1;
     // echo forward link for next page 
-   echo " <a href='{$_SERVER['PHP_SELF']}?id=".$id."&currentpage=$nextpage'>></a> ";
+   echo " <a href='detail.php?id=".$id."&currentpage=$nextpage'>></a> ";
    // echo forward link for lastpage
-   echo " <a href='{$_SERVER['PHP_SELF']}?id=".$id."&currentpage=$totalpages'>>></a> ";
+   echo " <a href='detail.php?id=".$id."&currentpage=$totalpages'>>></a> ";
 } // end if
 /****** end build pagination links ******/
 ?>

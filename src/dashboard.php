@@ -1,3 +1,10 @@
+<?php
+
+if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
+    header('Location:../index.php') ; 
+}
+?>
+
 <!DOCTYPE html>
 <html>
 	<!--
@@ -7,7 +14,7 @@
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
@@ -79,9 +86,13 @@
 				while($rowkat=mysql_fetch_array($hasilkat)){
 				$idkat=$rowkat['id'];
 				?>
-						<li>
+					<li>
 					<?php echo "<a href=\"#\" onclick=\"catchange(".$idkat.")\" id=\"kuliah\">\n";?><?php echo $rowkat['namakat']; ?></a>
-					<?php echo "<input id=\"kuliah\" onclick=\"deletekat(".$idkat.")\" type=\"button\" value=\"Delete\">"; ?></li>
+					<?php
+					if ($rowkat['idcreator'] == $loginid['id']) {
+						echo "<input id=\"kuliah\" onclick=\"deletekat(".$idkat.")\" type=\"button\" value=\"Delete\">";
+					}
+					?></li>
 					
 					<?php
 						}
@@ -114,7 +125,11 @@
 				
 
 				<?php echo "<div class=\"task_view\" id=\"curtask".$i."\">"; $i++; ?>
-					<?php echo "<img src=\"../img/done.png\" id=\"finish_".$idtask."\" onclick=\"deletetask(".$idtask.")\" class=\"task_done_button\" alt=\" \"/>"; ?>
+					<?php
+					if ($row['idcreator'] == $loginid['id']) {
+						echo "<img src=\"../img/done.png\" id=\"finish_".$idtask."\" onclick=\"deletetask(".$idtask.")\" class=\"task_done_button\" alt=\" \"/>";
+					}
+					?>
 					<div id="task_name_ltd" class="left dynamic_content_left">Nama Task</div>
 					<div id="task_name_rtd" class="left dynamic_content_right"> <?php echo "<a href=\"detail.php?id=".$idtask."\" "; ?>"><?php echo $row['namatask']; ?>  </a> </div>
 					<br><br>
@@ -132,7 +147,7 @@
 						echo "Belum Selesai";
 					} ?>
 					</div>
-					<?php echo "<input id=\"edit_task_button\" class=\"changestat\" onclick=\"changestat(".$idtask.",".$a.")\" type=\"button\" value=\"Ubah\">"; $a++; ?>
+					<?php echo "<input id=\"edit_task_button\" class=\"changestat\" onclick=\"changestat(".$idtask.",".$a.")\" type=\"button\" value=\"Change\">"; $a++; ?>
 					<br><br>
 					<div class="left dynamic_content_left">Tag</div>
 					<div class="left dynamic_content_right"> 

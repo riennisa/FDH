@@ -10,7 +10,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 		
@@ -30,10 +30,10 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 			
 			$query = $_GET['search_query'];
 			if (isset($_GET['username'])) {
-				$sql_username = mysqli_query($conn, "SELECT COUNT(*) FROM user WHERE fullname LIKE '%".$query."%'");
+				$sql_username = mysqli_query($conn, "SELECT COUNT(*) FROM user WHERE username LIKE '%".$query."%' OR email LIKE '%".$query."%' OR fullname LIKE '%".$query."%'");
 				$r = mysqli_fetch_row($sql_username);
 				$numrows_user = $r[0];
-				$sql_username = mysqli_query($conn, "SELECT * FROM user WHERE fullname LIKE '%".$query."%' LIMIT 0,5");
+				$sql_username = mysqli_query($conn, "SELECT * FROM user WHERE username LIKE '%".$query."%' OR email LIKE '%".$query."%' OR fullname LIKE '%".$query."%' LIMIT 0,5");
 			}
 			
 			if (isset($_GET['category'])) {

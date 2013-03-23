@@ -2,6 +2,10 @@
 
 include 'koneksi.php';
 
+$curr_username = $_COOKIE['username'];
+$sql_id = mysql_query("SELECT id FROM user WHERE username LIKE '".$curr_username."'");
+$loginid = mysql_fetch_array($sql_id);
+
 $query = "SHOW TABLE STATUS LIKE 'tugas'";
 $hasil = mysql_query($query);
 $data = mysql_fetch_array($hasil);
@@ -12,7 +16,6 @@ $deadline = $_POST['deadline_input'];
 $as = $_POST['assignee'];
 $tag = $_POST['tag_input'];
 $cat = $_POST['idkat'];
-$ava = $_FILES["at_upload"]["name"] ;
 
 echo $newid ;
 echo $taskname ;
@@ -23,7 +26,8 @@ echo $cat ;
 echo $ava ;
 
 //Insert data to database
-$querytugas = "INSERT INTO `tugas` (`id`,`idkat`,`namatask`,`deadline`,`attachment`) VALUES ('$newid','$cat','$taskname','$deadline','$ava')" ;
+$a = $loginid['id'];
+$querytugas = "INSERT INTO `tugas` (`id`,`idkat`,`idcreator`,`namatask`,`deadline`) VALUES ('$newid','$cat',$a,'$taskname','$deadline')";
 if(mysql_query($querytugas)) {
     echo "querydata ok" ;
 }
@@ -47,20 +51,43 @@ foreach ($as as $asin){
     mysql_query($queryas) ;
 }
 
-// Upload File
-$allowedExts = array("jpg", "jpeg", "gif", "png");
-$temp = (explode(".", $_FILES["at_upload"]["name"]));
-$extension = end($temp);
-if ($_FILES["at_upload"]["error"] > 0) {
-    echo "Return Code: " . $_FILES["at_upload"]["error"] . "<br>";
-} else {
-    if (file_exists("attachment/" . $_FILES["at_upload"]["name"])) {
-        echo $_FILES["at_upload"]["name"] . " already exists. ";
-    } else {
-        move_uploaded_file($_FILES["at_upload"]["tmp_name"], "../attachment/" . $_FILES["at_upload"]["name"]);
-        echo "Stored in: " . "../attachment/" . $_FILES["at_upload"]["name"];
+    // function rearrange array
+    function rearrangeArray(&$file_post) {
+        $file_ary = array() ;
+        $file_count = count($file_post['name']) ;
+        $file_key = array_keys($file_post);
+        
+        for ($i=0 ; $i< $file_count ; $i++){
+            foreach($file_key as $key){
+                    $file_ary[$i][$key] = $file_post[$key][$i];
+                }    
+        }
+        
+        return $file_ary ;
     }
-}
-
-header("Location:dashboard.php") ;
+    
+    //file dari form di rearrange
+    $file_ary = rearrangeArray($_FILES['at_upload']) ;
+    
+    //Iterasi input file ke database
+    foreach ($file_ary as $file){
+        $filename = $file['name'];
+        $queryatt = "INSERT INTO `attachment` (`idtask`,`filename`) VALUES ('$newid','$filename')" ;
+        echo $filename;
+        mysql_query($queryatt) ;
+        
+        if ($file["error"] > 0) {
+        echo "Return Code: " . $file["error"] . "<br>";
+        } else {
+            if (file_exists("attachment/" . $file["name"])) {
+                echo $file["name"] . " already exists. ";
+            } else {
+                move_uploaded_file($file["tmp_name"], "../attachment/" . $file["name"]);
+                echo "Stored in: " . "../attachment/" . $file["name"];
+            }
+        }
+        
+    }
+    
+    header("Location:dashboard.php");    
 ?>

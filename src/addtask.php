@@ -1,3 +1,9 @@
+<?php
+
+if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
+    header('Location:../index.php') ; 
+}
+?>
 <!DOCTYPE html>
 <?php
 include 'koneksi.php';
@@ -19,13 +25,13 @@ $curr_username = $_COOKIE['username'];
     <head>
         <link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
         <script type="text/javascript" src="../js/edit_task.js"></script> 
         <script type="text/javascript" src="../js/animation.js"></script> 
         <script type="text/javascript" src="../js/ajax.js"></script> 
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >		
-        <title> Eurilys </title>
+        <title> do.Metro </title>
 
         <script language="javascript">
             function deleteRow(tableID) {
@@ -95,20 +101,24 @@ $curr_username = $_COOKIE['username'];
         <section>
             <div id="navbar">
                 <div id="short_profile">
-                    <img id="profile_picture" src="../img/avatar1.png" alt="">
-                    <div id="profile_info">
-                        Ruth Natasha 
-                        <br><br>
-                        <div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
-                    </div>
-                </div>
-                
+					<?php echo "<img id='profile_picture' src='../img/avatar/".$login['avatar']."'>";?>
+					<div id="profile_info">
+						<?php echo $login['username'] ?>
+					</div>
+				</div>
             </div>
+			<?php
+				$sql_kat = mysql_query("SELECT namakat FROM kategori WHERE id = $idkat");
+				$namakat = mysql_fetch_array($sql_kat);
+			?>
             <div id="dynamic_content">
                 <div id="add_task_container">
                     <div id="add_task_header" class="left top30 dynamic_content_head">
+						<span class="link_tosca"><?php echo "Kategori : " .$namakat['namakat']; ?></span>
+						<br>
+						<br>
                         Add New Task
-                    </div>
+					<div id="addtask">
                     <form id="addtask_form" method="post" action="addtask_add.php" enctype="multipart/form-data">
                         <div id="row1_addtask" class="left top30 dynamic_content_row">
                             <div id="task_name_lat" class="left dynamic_content_left">Task Name</div>
@@ -137,7 +147,9 @@ $curr_username = $_COOKIE['username'];
                                             </datalist>
                                         </TD>
                                     </TR>
-                                </TABLE> 
+                                </TABLE>
+								<input id="more_assignee_button" type="button" value="More Assignee" class="link_blue_rect" onclick="addRow('dataTable')"/>
+								<input id="del_assignee_button" type="button" value="Remove Assignee" class="link_blue_rect" onclick="deleteRow('dataTable')"/>
                             </div>
                         </div>
 
@@ -152,8 +164,17 @@ $curr_username = $_COOKIE['username'];
                         <div id="row5_addtask" class="left top10 dynamic_content_row">
                             <div id="attachment_lat" class="left dynamic_content_left">Attachment</div>
                             <div id="attachment_rat" class="left dynamic_content_right">
-                                <input type="file" id="at_upload" onchange="javascript:checkTaskAttachment();" name="at_upload"/>
-                                <img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>
+								<TABLE id="dataTable2" width="290px" border="0.5">
+                                    <TR>
+                                        <TD><INPUT type="checkbox" name="chk"/></TD>
+                                        <TD>
+											<input type="file" id="at_upload" onchange="javascript:checkTaskAttachment();" name="at_upload[]"/>
+											<img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>  
+                                        </TD>
+                                    </TR>
+                                </TABLE>
+								<input id="more_assignee_button" type="button" value="More Attachment" class="link_blue_rect" onclick="addRow('dataTable2')"/>
+								<input id="del_assignee_button" type="button" value="Remove Attachment" class="link_blue_rect" onclick="deleteRow('dataTable2')"/>
                             </div>
                         </div>
 
@@ -169,10 +190,11 @@ $curr_username = $_COOKIE['username'];
 
                         <div id="row7_addtask" class="left top10 dynamic_content_row">
                             <input id="add_task_button" type="submit" value="Add Task" class="link_blue_rect">
-                            <input id="more_assignee_button" type="button" value="Add Assignee" class="link_blue_rect" onclick="addRow('dataTable')"/>
-                            <input id="del_assignee_button" type="button" value="Remove Assignee" class="link_blue_rect" onclick="deleteRow('dataTable')"/>
                         </div>
+						
                     </form>
+					</div>
+					</div>
                 </div>
 
             </div>
@@ -185,7 +207,7 @@ $curr_username = $_COOKIE['username'];
                 <br><br>
                 About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
                 <br>
-                Eurilys 2013
+                do.Metro 2013
             </div>
         </footer>
     </body>

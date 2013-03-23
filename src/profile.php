@@ -10,7 +10,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 	<head>
 		<link rel="stylesheet" href="../css/desktop_style.css">
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"></script> 
 		<script type="text/javascript" src="../js/profile.js"></script>
@@ -114,7 +114,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 					<span id="left">
 						<span id='change_password'>
 							<?php if ($loginid == $profid) { ?>
-								<button class='link_tosca' id='change_pass_button' onclick='change_pass()'> Change Password </button>
+								<button class='link_tosca' id='change_pass_button' onclick="change_pass()"> Change Password </button>
 							<?php } ?>
 						</span>
 					</span>
@@ -140,8 +140,8 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 				</div>
 			</div>
 			<?php
-				$sql_on = mysqli_query($conn, "SELECT * FROM assignee as a, tugas as t WHERE a.idtask = t.id AND nama_user LIKE '".$profile['username']."' AND status=0");
-				$sql_done = mysqli_query($conn, "SELECT * FROM assignee as a, tugas as t WHERE a.idtask = t.id AND nama_user LIKE '".$profile['username']."' AND status=1");
+				$sql_on = mysqli_query($conn, "SELECT * FROM assignee as a, tugas as t WHERE a.idtask = t.id AND a.nama_user LIKE '".$profile['username']."' AND status=0");
+				$sql_done = mysqli_query($conn, "SELECT * FROM assignee as a, tugas as t WHERE a.idtask = t.id AND a.nama_user LIKE '".$profile['username']."' AND status=1");
 			?>
 			<div id="profile_right">
 				<div class="headsdeh">Ongoing Tasks</div>

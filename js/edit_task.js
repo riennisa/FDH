@@ -3,7 +3,7 @@ window.onload=function(){SomeJavaScriptCode};
 
 function edit_task(str) {
 	var deadline = document.getElementById("deadline_rtd").innerHTML;
-	document.getElementById("deadline_rtd").innerHTML = '<input type="text" id="deadline"></input>';
+	document.getElementById("deadline_rtd").innerHTML = '<input type="date" id="deadline"></input>';
 	document.getElementById("deadline").value = deadline;
 	document.getElementById("edit_task_button").style.display = 'none';
 	document.getElementById("save_button_td").style.display = 'block';
@@ -282,6 +282,34 @@ xmlhttp.onreadystatechange=function()
     }
   }
 xmlhttp.open("GET","delete.php?id="+str,true);
+xmlhttp.send();
+}
+
+}
+
+function del_komen(str,stat) {
+	{
+if (str=="")
+  {
+  document.getElementById("comment_rtd").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("comment_rtd").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","del_komen.php?id="+str+"&stat="+stat,true);
 xmlhttp.send();
 }
 

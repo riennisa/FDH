@@ -652,7 +652,7 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 	border-left: 2px solid gray;
 	display:block;
 	width:73%;
-	height:100%;
+	height:680px;
 	float:right;
 	overflow:auto;
 	color:#55565B;
@@ -727,6 +727,11 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 #curtask3{top:480px;}
 #curtask4{top:700px;}
 #curtask5{top:920px;}
+#curtask6{top:1140px;}
+#curtask7{top:1360px;}
+#curtask8{top:1580px;}
+#curtask9{top:1800px;}
+#curtask10{top:2020px;}
 
 .search_result {
 	width:90%;
@@ -757,11 +762,12 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 }
 
 #searchtitle {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
 	color: white;
 	background-color: #5bc9f5;
 	vertical-align: middle;
+	font-family:"Segoe UI", serif ;
 }
 
 #user_avatar {
@@ -1032,3 +1038,8 @@ border: 1px solid rgb(204, 204, 204);}
 	}
 	
 	
+#addtask {
+	width: 70%;
+	height: 30%;
+	background-color: red;
+}
