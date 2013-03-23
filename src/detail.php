@@ -20,7 +20,8 @@
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/edit_task.js"> </script> 
 		<script type="text/javascript" src="../js/animation.js"> </script> 
-		<script type="text/javascript" src="../js/ajax.js"> </script> 
+		<script type="text/javascript" src="../js/ajax.js"> </script>
+		<script type="text/javascript" src="../js/ajax.js"> </script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >		
 		<title> do.Metro </title>
 	</head>
@@ -232,7 +233,11 @@ echo "</select></form>";
 					echo " | ";
 					}
 					?>
-					<div id="edit_tag" style="display:none"> <input type="text" id="tag_input"><?php echo "<input id=\"tag_button\" type=\"button\" onclick=\"editTag(".$id.")\" value=\"Save Tag\" />"; ?>
+					<div id="edit_tag" style="display:none">
+						<input type="text" id="tag_input" list="listtag" onkeydown="javascript:getSuggesttag();">
+						<datalist id="listtag">
+						</datalist>
+						<?php echo "<input id=\"tag_button\" type=\"button\" onclick=\"editTag(".$id.")\" value=\"Save Tag\" />"; ?>                    
 					</div>
 
 					</div>

@@ -13,6 +13,7 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 		<script type="text/javascript" src="../js/base_search.js"></script>
 		<script type="text/javascript" src="../js/search.js"></script> 
 		<script type="text/javascript" src="../js/animation.js"> </script>
+		<script type="text/javascript" src="../js/ajax.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 		
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> do.Metro </title>
@@ -101,7 +102,9 @@ if (($_COOKIE['username'] == '') && ($_COOKIE['password'] == '')) {
 					<form id="nav_search_form" action="search_results.php" method="get">
 						<div id="nav_search_change" class="section">
 							&nbsp;Change Keyword
-							<input id="nav_search_box" name="search_query" type="text" value="">
+							<input id="nav_search_box" name="search_query" type="text" value="" list="listsearch" onkeydown="javascript:getSuggestse();">
+							    <datalist id="listsearch">
+								</datalist>
 						</div>
 						<div class="section">
 							<ul class="nav_search_filter">

@@ -66,6 +66,38 @@ function getSuggest(){
     xhtml.send() ;
 }
 
+function getSuggestse(){
+    
+    var xhtml = createObject();
+    
+     xhtml.onreadystatechange = function() {
+            if (xhtml.readyState == 4 && xhtml.status == 200) 
+            {
+                validresponse = xhtml.responseText ;
+                document.getElementById("listsearch").innerHTML = xhtml.responseText;  
+            }
+    }
+   
+    xhtml.open("GET","addtask_suggest.php?",true) ;
+    xhtml.send() ;
+}
+
+function getSuggesttag(){
+    
+    var xhtml = createObject();
+    
+     xhtml.onreadystatechange = function() {
+            if (xhtml.readyState == 4 && xhtml.status == 200) 
+            {
+                validresponse = xhtml.responseText ;
+                document.getElementById("listtag").innerHTML = xhtml.responseText;  
+            }
+    }
+   
+    xhtml.open("GET","tag_suggest.php?",true) ;
+    xhtml.send() ;
+}
+
 var regValid = 0;
 function regCheck() {
 
